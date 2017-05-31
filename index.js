@@ -57,7 +57,7 @@ app.get('/zawad', function(request, response){
   var msg7 = ("Is A Wyntern")
   var msg8 = ("Is A Bad Jaunt")
   var msg9 = ("Is Grinding")
-  var msg10 = ("Is GAYYYYYYYY")
+  var msg10 = ("Is Grinding On Another Dude")
   var msg11 = ("Was Born In Queens ")
   var msg12 = ("Is The GOAT")
   var msg13 = ("Looks Like A Goat")
