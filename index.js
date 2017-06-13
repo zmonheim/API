@@ -23,6 +23,7 @@ app.get('/db', function (request, response) {
   });
 });
 
+
 app.get('/', function(request, response) {
   response.render('pages/index');
 });
@@ -37,6 +38,7 @@ app.get('/message', function(request, response){
   var pass = "    To pass the time feel free to try to guess the number between 1-100 after you refresh the page :  "
   var or = ".   Or if that's too hard, here is a number between 1-10 : "
   var maybe = ".  Maybe you are feeling lucky, guess the number between 1-1000 : "
+
   response.send(mess + sorry + "                " + pass + Math.floor(Math.random()*100 + 1) + or + Math.floor(Math.random()*10 + 1) + maybe + Math.floor(Math.random()*1000+1));
 });
 
@@ -49,22 +51,39 @@ app.get('/messages', function(request, response){
 
 app.post('/message', function(request, response){
   var msg = "An error occurred with the database. "
-  var msg1 = ("Please remain calm someone is bound to fix it.")
+  var msg1 = ("Please remain calm, G is bound to get someone on this.")
   var msg2 = ("Count to 397,640 and maybe the issue will be solved by then.")
   var msg3 = ("Blame the wynterns for the inconvenience.")
-  var msg4 = ("Dang that's too bad, we'll get Kunle OLOWOLOWOLO on it right away.")
+  var msg4 = ("Dang that's too bad, we'll get to the bottom of this")
   var msg5 = ("We're gonna take our time because deadlines are demeaning.")
   var msg6 = ("We have a bad case of the Mondays but it will be fixed eventually.")
   var msg7 = ("Oh well.")
   var msg8 = ("Sucks to suck.")
-  var msg9 = ("Sorry it is not fixed, a bad jaunt walked by... I'm sure you understand.")
+  var msg9 = ("My girl said her parents weren't home, I'm sure you understand.")
   var msg10 = ("Now go on with your life, nothing to see here.")
   var msg11 = ("Don't be mad at us I pinky promise we'll do better.")
   var msg12 = ("We might have fixed this if we had administrator rights.")
   var msg13 = ("Don't fret, Zawad is an uncooked bagel")
   var messages = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13]
   var i = Math.floor(Math.random()*13)
-  response.send(msg + messages[i])
+
+  var canConnect = false;
+  var conn = null;
+  try{
+      conn = DriverManager.getConnection("jdbc:mysql://localhost/");
+      canConnect = true;
+  }catch (err){
+     canConnect = false;
+  }
+
+  if (!canConnect){
+    response.send(msg + messages[i]);
+  }
+
+  if (canConnect){
+    response.send("database is working");
+  }
+
 })
 
 app.get('/fakework', function(request, response){
